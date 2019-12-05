@@ -10,20 +10,23 @@ export const Timer = () => {
     return () => clearInterval(intervalId)
   }, [time])
 
-  const transformTime = (time) => {
-    const secondsToMinutes = Math.floor((time / 60).toFixed(2))
+  const transformSeconds = (time) => {
     const seconds = (time % 60)
-    /** TODO Refactor**/
-    if (time > 60) {
-      if (secondsToMinutes < 10) {
-        return '0' + secondsToMinutes + ':' + (seconds < 10 ? '0' + seconds : seconds)
-      }
-      return secondsToMinutes + ':' + seconds
-    } else if (seconds < 10) {
-      return '01:' + '0' + seconds
-    } else {
-      return '00:' + seconds
-    }
+    if (seconds === 0) return '00'
+    return (seconds < 10 ? '0' + seconds : seconds)
+  }
+
+  const transformMinutes = (time) => {
+    const minutes = Math.floor((time / 60).toFixed(2))
+    if (minutes < 10) return '0' + minutes
+    if (time > 60) return minutes
+  }
+
+  const transformTime = (time) => {
+    const seconds = transformSeconds(time)
+    const minutes = transformMinutes(time)
+
+    return `${minutes}:${seconds}`
   }
 
   return (

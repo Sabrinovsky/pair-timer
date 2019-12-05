@@ -36,6 +36,7 @@ container{
   justify-content: center;
   align-items: center;
   background:linear-gradient(15deg, #e47e00, rgba(25, 190, 33, 0.8));
+  font-size: 50px;
 }
 
 .inner-circle{
