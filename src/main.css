@@ -9,8 +9,9 @@ body, ul, li, p {
   list-style: none;
   font-family: sans-serif;
   font-size: 1.2rem;
-  height: 200px;
+  background: linear-gradient(to right, rgb(172, 182, 229), #ff9ff3);
 }
+
 
 header{
   height: 20vh;
@@ -35,16 +36,17 @@ container{
   display: flex;
   justify-content: center;
   align-items: center;
-  background:linear-gradient(15deg, #e47e00, rgba(25, 190, 33, 0.8));
+  background:linear-gradient(15deg, #16a085,#9b59b6);
   font-size: 50px;
 }
 
 .inner-circle{
   border-radius: 124px;
-  background-color: #eee;
+  background-color: #c8d6e5;
   height: 190px;
   width: 190px;
   display: flex;
   justify-content: center;
   align-items: center;
+  color:#222f3e;
 }
