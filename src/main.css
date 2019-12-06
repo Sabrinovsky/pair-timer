@@ -21,11 +21,12 @@ footer{
   height: 20vh;
 }
 
-container{
+.container{
   display:flex;
   justify-content: center;
   align-items: center;
   height: 60vh;
+  flex-direction: column;
 }
 
 .circle{
@@ -50,4 +51,11 @@ container{
   justify-content: center;
   align-items: center;
   color:#222f3e;
+}
+
+.btn{
+  margin-top: 25px;
+  box-shadow: none;
+  border: none;
+  cursor: pointer;
 }
