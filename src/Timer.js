@@ -9,6 +9,8 @@ export const Timer = ({ pause }) => {
     if (time < 0) {
       setTime(working ? 300 : 1500)
       setWorking(!working)
+      // eslint-disable-next-line
+      new Notification(working ? 'Take a break' : 'Focus on code!')
     }
 
     if (!pause) {
