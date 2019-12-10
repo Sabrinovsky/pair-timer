@@ -1,29 +1,36 @@
 import React, { useState, useEffect } from 'react'
 import { formatTime } from './services/timerFormater'
 
-export const Timer = ({ pause }) => {
-  const [time, setTime] = useState(1500)
+export const Timer = ({ pause, initialDate }) => {
+  const [time, setTime] = useState('25:00')
   const [working, setWorking] = useState(true)
+  const [workTime, setWorkTime] = useState(1)
 
   useEffect(() => {
-    if (time < 0) {
-      setTime(working ? 300 : 1500)
+    if (time === '0:0') {
+      setTime(working ? '5:00' : '25:00')
+      setWorkTime(working ? 5 : 25)
       setWorking(!working)
       // eslint-disable-next-line
       new Notification(working ? 'Take a break' : 'Focus on code!')
     }
 
     if (!pause) {
-      const intervalId = setInterval(() => {
-        setTime(time - 1)
-      }, 1000)
-      return () => clearInterval(intervalId)
+      setInterval(() => {
+        const teste = new Date().getTime()
+        const distance = (initialDate + workTime * 60000) - teste
+
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000)
+
+        setTime(minutes + ':' + seconds)
+      }, 100)
     }
-  }, [time, pause])
+  })
 
   return (
     <span>
-      {formatTime(time)}
+      {time}
     </span>
   )
 }

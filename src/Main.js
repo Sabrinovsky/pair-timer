@@ -4,10 +4,16 @@ import { Timer } from './Timer'
 
 function Main () {
   const [pause, setPause] = useState(true)
+  const [initialDate, setIninitalDate] = useState(undefined)
 
   useEffect(() => {
     Notification.requestPermission()
   })
+
+  const start = () => {
+    setIninitalDate(new Date().getTime())
+    setPause(!pause)
+  }
 
   return (
     <>
@@ -15,10 +21,10 @@ function Main () {
       <div className='container'>
         <div className='circle'>
           <div className='inner-circle'>
-            <Timer pause={pause}/>
+            <Timer pause={pause} initialDate={initialDate}/>
           </div>
         </div>
-        <div className='btn' onClick={() => setPause(!pause)}>
+        <div className='btn' onClick={start}>
           {pause
             ? <img width='50px' src="play-button-arrowhead.svg" alt="Kiwi standing on oval"></img>
             : <img width='50px' src="pause-button.svg" alt="Kiwi standing on oval"></img>
