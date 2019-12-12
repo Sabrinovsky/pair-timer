@@ -4,14 +4,14 @@ import { Timer } from './Timer'
 
 function Main () {
   const [pause, setPause] = useState(true)
-  const [initialDate, setIninitalDate] = useState(undefined)
+  const [initialDate, setIninitalDate] = useState(null)
 
   useEffect(() => {
     Notification.requestPermission()
   })
 
   const start = () => {
-    setIninitalDate(new Date().getTime())
+    if (!initialDate) setIninitalDate(new Date().getTime())
     setPause(!pause)
   }
 

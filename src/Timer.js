@@ -6,6 +6,19 @@ export const Timer = ({ pause, initialDate }) => {
   const [working, setWorking] = useState(true)
   const [minutesToRun, setMinutesToRun] = useState(0)
   const [pomodoros, setPomodoros] = useState(0)
+  const [pausedTime, setPausedTime] = useState(0)
+  const [firstRun, setFirstRun] = useState(true)
+
+  useEffect(() => {
+    if (!firstRun) {
+      if (pause) {
+        setPausedTime(pausedTime + new Date().getTime())
+      } else if (pausedTime !== 0) {
+        setPausedTime(new Date().getTime() - pausedTime)
+      }
+    }
+    setFirstRun(false)
+  }, [pause])
 
   useEffect(() => {
     if (pomodoros === 4) {
@@ -28,7 +41,10 @@ export const Timer = ({ pause, initialDate }) => {
     if (!pause && clock !== '0:0') {
       const interval = setInterval(() => {
         const now = new Date().getTime()
-        const distance = (initialDate + minutesToRun * 60000) - now
+        const distance = (initialDate + pausedTime + minutesToRun * 60000) - now
+
+        console.log(Math.floor((pausedTime % (1000 * 60)) / 1000))
+
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
         const seconds = Math.floor((distance % (1000 * 60)) / 1000)
 
@@ -41,7 +57,7 @@ export const Timer = ({ pause, initialDate }) => {
       }, 900)
       return () => clearInterval(interval)
     }
-  }, [clock, initialDate])
+  }, [clock, initialDate, pausedTime])
 
   return (
     <span>
